@@ -1,6 +1,7 @@
 package com.zs.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,21 +46,21 @@ import io.swagger.annotations.ApiOperation;
 @Api("测试")
 public class TestSwaggerController {
 	
-	@RequestMapping("/method1")
-	@ApiOperation(value="method 1 summary " ,notes="method1 notes")
-	@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="name" ,value="名称" ,required=true,defaultValue="defaultName")
+	@RequestMapping(value="/method1",method=RequestMethod.GET)
+	@ApiOperation(value="method 1 summary ",notes="method1 notes")
+	@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="name" ,value="名称" )
 	public Object method1(@RequestParam(value = "name",required=true)String name) {
 		System.out.println("method1 called --------------------------------------------------,param:"+name);
 		return name;
 	}
 	
-	@RequestMapping("/method2")
+	@RequestMapping(value="/method2",method=RequestMethod.GET)
 	@ApiOperation(value="method 2 summary" ,notes="method2 notes")
 	@ApiImplicitParams(value= {
-			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="service",value="服务名",required=true),
-			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="login_name",value="登录名",required=true),
-			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="pid",value="partnerid",required=true),
-			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="sign",value="验签",required=true)
+			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="service",value="服务名"),
+			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="login_name",value="登录名"),
+			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="pid",value="partnerid"),
+			@ApiImplicitParam(paramType="query",dataType="java.lang.String",name="sign",value="验签")
 	})
 	public Object method2(BaseRequsetVo req) {
 		System.out.println("method2 called --------------------------------------------------,param:"+req.toString());
